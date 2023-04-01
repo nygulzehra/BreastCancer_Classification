@@ -140,7 +140,7 @@ if st.sidebar.button("Submit"):
         'smoothness_se' : [smoothness_se],
         'Prediction': [pred]
 
-    })
+    }, index=[0])
 
     results_df["Prediction"] = results_df["Prediction"].apply(lambda x: str(x).replace("0","Benign"))
     results_df["Prediction"] = results_df["Prediction"].apply(lambda x: str(x).replace("1","Malignant"))
