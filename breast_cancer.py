@@ -108,7 +108,7 @@ input_df = pd.DataFrame({
     'area_se' : [area_se],
     'smoothness_se' : [smoothness_se]
 
-})
+}, index=[0])
 
 pred = dt2_model.predict(input_df.values)
 pred_probability = np.round(dt2_model.predict_proba(input_df.values), 2)
