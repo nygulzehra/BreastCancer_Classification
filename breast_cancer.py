@@ -17,7 +17,7 @@ st.set_page_config(
     }
 )
 
-# st.image("bcancer.jpeg")
+st.image("bcancer.jpeg")
 # Başlık Ekleme
 st.title("**:red[Breast Tumor Classification Project]**")
 
@@ -91,7 +91,7 @@ smoothness_se = st.sidebar.number_input(label="SE of Smoothness", format="%.4f")
 # Pickle kütüphanesi kullanarak eğitilen modelin tekrardan kullanılması
 
 
-dt2_model = load('https://github.com/nygulzehra/BreastCancer_Classification/dt2_model.pkl')
+dt2_model = load('dt2_model.pkl')
 
 input_df = pd.DataFrame({
     'area_worst' : [area_worst],
