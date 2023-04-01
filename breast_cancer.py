@@ -24,7 +24,7 @@ st.markdown("""
     }
     </style>
 """,unsafe_allow_html=True)
-st.image("Desktop/DataScience/proje3/bcancer.jpeg")
+st.image("bcancer.jpeg")
 # Başlık Ekleme
 st.title("**:red[Breast Cancer Classification Project]**")
 
@@ -37,7 +37,7 @@ st.markdown("Thanks to last machine learning technologies, we can predict tumors
 st.markdown("We used Breast Cancer Wisconsin (Diagnostic) Dataset.")
 
 # Resim Ekleme
-st.image("Desktop/DataScience/proje3/bc-image-cover.png")
+st.image("bc-image-cover.png")
 
 
 
@@ -74,7 +74,7 @@ st.markdown("- **smoothness_se**: SE of Smoothness")
 # st.markdown("- **symmetry_worst**: Worst Symmetry")
 
 # Pandasla veri setini okuyalım
-df = pd.read_csv("Desktop/DataScience/proje3/breast-cancer.csv")
+df = pd.read_csv("breast-cancer.csv")
 # Tablo Ekleme
 st.table( df.sample(5, random_state=42))
 
@@ -98,7 +98,7 @@ smoothness_se = st.sidebar.number_input(label="SE of Smoothness", format="%.4f")
 # Pickle kütüphanesi kullanarak eğitilen modelin tekrardan kullanılması
 
 
-dt2_model = load('Desktop/DataScience/proje3/dt2_model.pkl')
+dt2_model = load('dt2_model.pkl')
 
 input_df = pd.DataFrame({
     'area_worst' : [area_worst],
