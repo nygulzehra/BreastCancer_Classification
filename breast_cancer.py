@@ -8,7 +8,7 @@ from joblib import load
 
 
 st.set_page_config(
-    page_title="Breast Cancer Prediction",
+    page_title="Breast Tumor Classification",
     page_icon="",
     layout="centered",
     menu_items={
@@ -17,16 +17,9 @@ st.set_page_config(
     }
 )
 
-st.markdown("""
-    <style>
-        body{
-            background-color: pink;
-    }
-    </style>
-""",unsafe_allow_html=True)
 st.image("bcancer.jpeg")
 # Başlık Ekleme
-st.title("**:red[Breast Cancer Classification Project]**")
+st.title("**:red[Breast Tumor Classification Project]**")
 
 # Markdown Oluşturma
 st.markdown("Breast cancer is the most common cancer amongst women in the world. It accounts for 25% of all cancer cases, and affected over 2.1 Million people in 2015 alone. It starts when cells in the breast begin to grow out of control. These cells usually form tumors that can be seen via X-ray or felt as lumps in the breast area.")
