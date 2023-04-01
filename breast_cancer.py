@@ -2,7 +2,7 @@ import pickle
 import pandas as pd
 import streamlit as st
 import numpy as np
-from joblib import load
+import load
 
 # Sayfa Ayarları
 
