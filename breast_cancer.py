@@ -91,7 +91,7 @@ smoothness_se = st.sidebar.number_input(label="SE of Smoothness", format="%.4f")
 # Pickle kütüphanesi kullanarak eğitilen modelin tekrardan kullanılması
 
 
-dt2_model = load('dt2_model.pkl')
+dt2_model = load(open('dt2_model.pkl','rb'))
 
 input_df = pd.DataFrame({
     'area_worst' : [area_worst],
