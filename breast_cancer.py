@@ -38,35 +38,14 @@ if app_mode=='Home':
 
     # Header Ekleme
     st.header("**:red[Breast Cancer Dateset Dictionary]**:")
-    st.markdown("- **area_worst**: Worst Area")
-    st.markdown("- **concave_points_worst**: Worst Concave Points")
-    st.markdown("- **texture_worst**: Worst Texture")
-    st.markdown("- **texture_mean**: Mean of Texture")
-    st.markdown("- **concavity_worst**: Worst Concavity")
-    st.markdown("- **symmetry_se**: SE of Symmetry")
-    st.markdown("- **radius_worst**: Worst Radius")
-    st.markdown("- **compactness_worst**: Worse Compactness")
     st.markdown("- **fractal_dimension_worst**: Worst Fractal Dimension")
-    st.markdown("- **fractal_dimension_se**: SE of Fractal Dimension")
+    st.markdown("- **concave_points_worst**: Worst Concave Points")
+    st.markdown("- **compactness_worst**: Worse Compactness")
     st.markdown("- **concavity_mean**: Mean of Concavity")
-    st.markdown("- **area_se**: Area of SE")
-    st.markdown("- **smoothness_se**: SE of Smoothness")
-
-    # st.markdown("- **area_mean**: Mean Area of Lobes")
-    # st.markdown("- **smoothness_mean**: Mean of Smoothness Levels")
-    # st.markdown("- **compactness_mean**: Mean of Compactness")
-    # st.markdown("- **concave points_mean**: Mean of Cocave Points")
-    # st.markdown("- **symmetry_mean**: Mean of Symmetry")
-    # st.markdown("- **fractal_dimension_mean**: Mean of Fractal Dimension")
-    # st.markdown("- **radius_se**: SE of Radius")
-    # st.markdown("- **texture_se**: SE of Texture")
-    # st.markdown("- **perimeter_se**: Perimeter of SE")
-    # st.markdown("- **compactness_se**: SE of compactness")
-    # st.markdown("- **concavity_se**: SEE of concavity")
-    # st.markdown("- **concave points_se**: SE of concave points")
-    # st.markdown("- **perimeter_worst**: Worst Permimeter")
-    # st.markdown("- **smoothness_worst**: Worst Smoothness")
-    # st.markdown("- **symmetry_worst**: Worst Symmetry")
+    st.markdown("- **compactness_mean**: Mean of Compactness")
+    st.markdown("- **radius_se**: SE of Radius")
+    st.markdown("- **compactness_se**: SE of compactness")
+    st.markdown("- **symmetry_worst**: Worst Symmetry")
 
     # Pandasla veri setini okuyalım
     df = pd.read_csv("breast-cancer.csv")
@@ -75,45 +54,34 @@ if app_mode=='Home':
 elif app_mode == 'Prediction':
     st.sidebar.subheader("*:blue[Let's try classifying these tumors using machine learning!]*")
 
-    area_worst = st.sidebar.number_input("Worst Area", format="%.4f")
+    compactness_mean = st.sidebar.number_input("Mean of Compactness", format="%.4f")
+    concavity_mean = st.sidebar.number_input("Mean of Concavity", format="%.4f")
+    radius_se = st.sidebar.number_input("SE of Radius", format="%.4f")
+    compactness_se = st.sidebar.number_input("SE of Compactness", format="%.4f")
+    compactness_worst = st.sidebar.number_input("Worst Compactness", format="%.4f")
     concave_points_worst = st.sidebar.number_input("Worst Concave Points", format="%.4f")
-    texture_worst = st.sidebar.number_input(label="Worst Texture", format="%.4f")
-    texture_mean = st.sidebar.number_input(label="Mean of Texture", format="%.4f")
-    concavity_worst = st.sidebar.number_input(label="Worst Concavity ", format="%.4f")
-    symmetry_se = st.sidebar.number_input(label="SE of Symmetry", format="%.4f")
-    radius_worst = st.sidebar.number_input(label="Worst Radius", format="%.4f")
-    compactness_worst = st.sidebar.number_input(label="Worse Compactness ", format="%.4f")
-    fractal_dimension_worst = st.sidebar.number_input(label="Worst Fractal Dimension ", format="%.4f")
-    fractal_dimension_se = st.sidebar.number_input(label="SE of Fractal Dimension", format="%.4f")
-    concavity_mean = st.sidebar.number_input(label="Mean of Concavity", format="%.4f")
-    area_se = st.sidebar.number_input(label="Area of SE ", format="%.4f")
-    smoothness_se = st.sidebar.number_input(label="SE of Smoothness", format="%.4f")
+    symmetry_worst = st.sidebar.number_input("Worst Symmetry", format="%.4f")
+    fractal_dimension_worst = st.sidebar.number_input("Worst Fractal Dimension", format="%.4f")
     # st.sidebar.button("Submit")
-
     # Pickle kütüphanesi kullanarak eğitilen modelin tekrardan kullanılması
 
 
-    dt2_model = load('dt2_model.pkl')
+    log_reg = load('logreg_model.pkl')
 
     input_df = pd.DataFrame({
-        'area_worst' : [area_worst],
-        'concave_points_worst' : [concave_points_worst],
-        'texture_worst' : [texture_worst],
-        'texture_mean' : [texture_mean],
-        'concavity_worst' : [concavity_worst],
-        'symmetry_se' : [symmetry_se],
-        'radius_worst' : [radius_worst],
-        'compactness_worst' : [compactness_worst],
-        'fractal_dimension_worst' : [fractal_dimension_worst],
-        'fractal_dimension_se' : [fractal_dimension_se],
-        'concavity_mean' : [concavity_mean],
-        'area_se' : [area_se],
-        'smoothness_se' : [smoothness_se]
+        'compactness_mean':[compactness_mean],
+        'concavity_mean':[concavity_mean],
+        'radius_se':[radius_se],
+        'compactness_se':[compactness_se],
+        'compactness_worst':[compactness_worst],
+        'concave points_worst':[concave_points_worst],
+        'symmetry_worst':[symmetry_worst],
+        'fractal_dimension_worst':[fractal_dimension_worst]
 
     }, index=[0])
 
-    pred = dt2_model.predict(input_df.values)
-    pred_probability = np.round(dt2_model.predict_proba(input_df.values), 2)
+    pred = log_reg.predict(input_df.values)
+    pred_probability = np.round(log_reg.predict_proba(input_df.values), 2)
 
     #---------------------------------------------------------------------------------------------------------------------
 
@@ -127,19 +95,14 @@ elif app_mode == 'Prediction':
 
         # Sonuçları Görüntülemek için DataFrame
         results_df = pd.DataFrame({
-            'area_worst' : [area_worst],
-            'concave_points_worst' : [concave_points_worst],
-            'texture_worst' : [texture_worst],
-            'texture_mean' : [texture_mean],
-            'concavity_worst' : [concavity_worst],
-            'symmetry_se' : [symmetry_se],
-            'radius_worst' : [radius_worst],
-            'compactness_worst' : [compactness_worst],
-            'fractal_dimension_worst' : [fractal_dimension_worst],
-            'fractal_dimension_se' : [fractal_dimension_se],
-            'concavity_mean' : [concavity_mean],
-            'area_se' : [area_se],
-            'smoothness_se' : [smoothness_se],
+            'compactness_mean':[compactness_mean],
+            'concavity_mean':[concavity_mean],
+            'radius_se':[radius_se],
+            'compactness_se':[compactness_se],
+            'compactness_worst':[compactness_worst],
+            'concave points_worst':[concave_points_worst],
+            'symmetry_worst':[symmetry_worst],
+            'fractal_dimension_worst':[fractal_dimension_worst],
             'Prediction': [pred]
 
         }, index=[0])
